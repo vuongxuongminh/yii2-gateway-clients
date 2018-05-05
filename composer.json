@@ -1,0 +1,30 @@
+{
+    "name": "vxm/yii2-gateway-clients",
+    "description": "An abstraction layer provide the skeleton for build rest api client (1-n).",
+    "type": "yii2-extension",
+    "keywords": ["yii2","extension","rest-api"],
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "Vuong Minh",
+            "email": "vuongxuongminh@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.1.0",
+        "yiisoft/yii2": ">=2.0.13",
+        "yiisoft/yii2-httpclient": "~2.0.0"
+    },
+	
+    "autoload": {
+        "psr-4": {
+            "vxm\\gatewayclients\\": "src"
+        }
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        }
+    ]
+}

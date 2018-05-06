@@ -8,7 +8,8 @@
 namespace vxm\gatewayclients;
 
 /**
- * Client Interface
+ * ClientInterface is an interface for all clients of the gateway.
+ *
  * @author Vuong Minh <vuongxuongminh@gmail.com>
  * @since 1.0
  */

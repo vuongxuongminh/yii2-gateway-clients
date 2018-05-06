@@ -8,7 +8,7 @@
 namespace vxm\gatewayclients;
 
 /**
- * Interface DataInterface is designed to get data validated use it for make request or get data from gateway server api.
+ * DataInterface is designed to get data validated use it for make request or get data from gateway server api.
  *
  * @author Vuong Minh <vuongxuongminh@gmail.com>
  * @since 1.0

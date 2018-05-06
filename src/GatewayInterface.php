@@ -9,8 +9,8 @@ namespace vxm\gatewayclients;
 
 
 /**
- * Interface GatewayInterface designed for (1-n) rest api client model, one gateway control multi client.
- * An Example:
+ * GatewayInterface designed for (1-n) rest api client model, one gateway control one or multi client.
+ * Example:
  * Config for (1-1) model:
  * ```php
  *      $gateway = new Gateway([

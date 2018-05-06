@@ -30,12 +30,12 @@ abstract class BaseGateway extends Component implements GatewayInterface
 {
 
     /**
-     * @event Event an event that is triggered at the beginning of request to gateway server api.
+     * @event RequestEvent an event that is triggered at the beginning of request to gateway server api.
      */
     const EVENT_BEFORE_REQUEST = 'beforeRequest';
 
     /**
-     * @event Event an event that is triggered at the end of requested to gateway server api.
+     * @event RequestEvent an event that is triggered at the end of requested to gateway server api.
      */
     const EVENT_AFTER_REQUEST = 'afterRequest';
 
@@ -279,7 +279,7 @@ abstract class BaseGateway extends Component implements GatewayInterface
      *
      * @param RequestData $requestData use to get data, command, client for prepare request to send.
      * @param HttpClient $httpClient use for make request to gateway server api.
-     * @return array response data requested.
+     * @return array response requested data.
      */
     abstract protected function requestInternal(RequestData $requestData, HttpClient $httpClient): array;
 

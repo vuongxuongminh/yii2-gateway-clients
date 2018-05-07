@@ -4,18 +4,17 @@ php:
   - 7.1
   - 7.2
 
-# faster builds on new travis setup not using sudo
-sudo: false
-
-# cache vendor dirs
-cache:
-  directories:
-    - $HOME/.composer/cache
-
 install:
-  - travis_retry composer self-update && composer --version
-  - export PATH="$HOME/.composer/vendor/bin:$PATH"
-  - travis_retry composer install --prefer-dist --no-interaction
+  - composer self-update
+  - composer install
+
+before_script:
+  - travis_retry composer self-update
+  - travis_retry composer install --no-interaction --prefer-source --dev
 
 script:
-- phpunit $PHPUNIT_FLAGS
+  - phpunit --coverage-text --coverage-clover=coverage.clover
+
+after_script:
+  - wget https://scrutinizer-ci.com/ocular.phar
+  - php ocular.phar code-coverage:upload --format=php-clover coverage.clover

@@ -14,7 +14,7 @@ use yii\base\BaseObject;
 use yii\base\InvalidArgumentException;
 
 /**
- * Class GatewayCollection. This is the collection of [[\vxm\gatewayclients\BaseGateway]], it may set to application components for easily control gateways.
+ * Class GatewayCollection. This is the collection of [[\vxm\gatewayclients\GatewayInterface]], it may set to application components for easily control gateways.
  *
  * @author Vuong Minh <vuongxuongminh@gmail.com>
  * @since 1.0
@@ -23,14 +23,14 @@ class GatewayCollection extends BaseObject
 {
 
     /**
-     * @var array|BaseGateway[] the gateways list.
+     * @var array|GatewayInterface[] the gateways list.
      */
     private $_gateways = [];
 
     /**
      * Return an array gateway lists.
      *
-     * @return BaseGateway[] the gateway lists.
+     * @return GatewayInterface[] the gateway lists.
      * @throws \yii\base\InvalidConfigException
      */
     public function getGateways(): array
@@ -45,7 +45,7 @@ class GatewayCollection extends BaseObject
     }
 
     /**
-     * @param array|BaseGateway[] $gateways
+     * @param array|GatewayInterface[] $gateways
      * @return bool Return true when gateways has been set.
      */
     public function setGateways(array $gateways): bool
@@ -61,16 +61,16 @@ class GatewayCollection extends BaseObject
      * Get gateway by id given.
      *
      * @param int|string $id An id of gateway need to get.
-     * @return BaseGateway object gateway define by arg name.
+     * @return GatewayInterface object gateway define by arg name.
      * @throws \yii\base\InvalidConfigException
      */
-    public function getGateway($id): BaseGateway
+    public function getGateway($id): GatewayInterface
     {
         $gateway = $this->_gateways[$id] ?? null;
 
         if ($gateway === null) {
-            throw new InvalidArgumentException('Gateway: `name` not exist!');
-        } elseif (!$gateway instanceof BaseGateway) {
+            throw new InvalidArgumentException("Gateway: `$id` not exist!");
+        } elseif (!$gateway instanceof GatewayInterface) {
             $gateway = $this->_gateways[$id] = Yii::createObject($gateway);
         }
 
@@ -78,13 +78,13 @@ class GatewayCollection extends BaseObject
     }
 
     /**
-     * Set gateway in to the gateway lists. This method called by [[setGateways]].
+     * Set gateway in to the gateway lists. This method called by [[setGateways()]].
      *
      * @param int|string $id An id of gateway in the gateway lists.
-     * @param string|array|BaseGateway $gateway config or object gateway value define by name.
+     * @param string|array|GatewayInterface $gateway config or object gateway value define by name.
      * @return bool Return TRUE when gateway has been set.
      */
-    protected function setGateway($id, $gateway): bool
+    public function setGateway($id, $gateway): bool
     {
         $this->_gateways[$id] = $gateway;
 
@@ -92,16 +92,27 @@ class GatewayCollection extends BaseObject
     }
 
     /**
-     * This method is an alias of [[vxm\gatewayclients\BaseGateway::request()]].
+     * Indicates if the gateway id has been set.
+     *
+     * @param $id
+     * @return bool Return TRUE when gateway id exist.
+     */
+    public function hasGateway($id)
+    {
+        return array_key_exists($id, $this->_gateways);
+    }
+
+    /**
+     * This method is an alias of [[vxm\gatewayclients\GatewayInterface::request()]].
      *
      * @param int|string $command The command of request
      * @param array $data An array data use to send to gateway server api.
      * @param int|string $gatewayId An id of gateway in the gateway lists.
-     * @param int|string $clientId An id client of gateway in the client lists.
-     * @return ResponseData An object data get from gateway server api.
+     * @param null|int|string $clientId An id client of gateway in the client lists. If not set default client of gateway will be use to make request.
+     * @return DataInterface An object data get from gateway server api.
      * @throws \yii\base\InvalidConfigException
      */
-    public function request($command, array $data, $gatewayId, $clientId): ResponseData
+    public function request($command, array $data, $gatewayId, $clientId = null): DataInterface
     {
         return $this->getGateway($gatewayId)->request($command, $data, $clientId);
     }

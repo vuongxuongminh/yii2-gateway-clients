@@ -150,7 +150,7 @@ abstract class BaseGateway extends Component implements GatewayInterface
     public function setClient($id, $client = null): bool
     {
         if ($client === null) {
-            $this->setDefaultClient($client);
+            $this->setDefaultClient($id);
         } else {
             $this->_clients[$id] = $client;
         }
@@ -249,7 +249,7 @@ abstract class BaseGateway extends Component implements GatewayInterface
      */
     protected function getHttpClient(bool $force = false): HttpClient
     {
-        if (!$this->_httpClient === null || $force) {
+        if ($this->_httpClient === null || $force) {
             /** @var HttpClient $client */
 
             $client = $this->_httpClient = Yii::createObject(ArrayHelper::merge([

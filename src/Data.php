@@ -42,6 +42,14 @@ class Data extends DynamicModel implements DataInterface
     }
 
     /**
+     * @inheritdoc
+     */
+    public function scenarios()
+    {
+        return array_merge([$this->getScenario() => []], parent::scenarios());
+    }
+
+    /**
      * @param array $attributes for ensure value or add more attribute from client.
      */
     protected function ensureAttributes(array &$attributes)

@@ -80,7 +80,7 @@ interface GatewayInterface
     /**
      * Get client by an id.
      *
-     * @param string|int $id An id of client in client lists. If not set it will return client get from [[getDefaultClient]].
+     * @param string|int $id An id of client in client lists. If not set it will return client get from [[getDefaultClient()]].
      * @return ClientInterface Client get by an id.
      */
     public function getClient($id = null): ClientInterface;
@@ -96,7 +96,7 @@ interface GatewayInterface
     public function setClient($id, $client = null): bool;
 
     /**
-     * Get default client. It called by [[getClient]], [[request]] when arg `$id` is null.
+     * Get default client. It called by [[getClient()]], [[request()]] when arg `$id` is null.
      * It designed for (1-1) model.
      *
      * @return ClientInterface
@@ -104,7 +104,7 @@ interface GatewayInterface
     public function getDefaultClient(): ClientInterface;
 
     /**
-     * Set default client. It called by [[setClient]] when arg `$client` of this method is null, an `$id` arg of [[setClient]] will be parse to `$client` arg.
+     * Set default client. It called by [[setClient]] when arg `$client` of this method is null, an `$id` arg of [[setClient()]] will be parse to `$client` arg.
      * It designed for (1-1) model.
      *
      * @param array|string|ClientInterface $client The client config or an object value set to default client.

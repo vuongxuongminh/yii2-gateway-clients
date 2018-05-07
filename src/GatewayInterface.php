@@ -123,7 +123,7 @@ interface GatewayInterface
 
     /**
      * Make a request to api server by client in the clients list detect from id, command and data depend on custom business of server api.
-     * An example:
+     * An examples.php:
      * ```php
      *      $gateway->setClient('vxm', ['token' => 123456]);
      *      $gateway->request('addMoney', ['money' => 100], 'vxm');

@@ -1,5 +1,5 @@
 # YII2 Gateway Clients
-**Skeleton for build an rest api client (1-n).**
+**Skeleton for build rest api client (1-n).**
 
 [![Latest Stable Version](https://poser.pugx.org/vxm/yii2-gateway-clients/v/stable)](https://packagist.org/packages/vxm/yii2-gateway-clients)
 [![Total Downloads](https://poser.pugx.org/vxm/yii2-gateway-clients/downloads)](https://packagist.org/packages/vxm/yii2-gateway-clients)

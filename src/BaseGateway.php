@@ -8,13 +8,14 @@
 namespace vxm\gatewayclients;
 
 use Yii;
+use ReflectionClass;
 
 use yii\base\Component;
 use yii\base\InvalidArgumentException;
 use yii\base\InvalidConfigException;
 use yii\helpers\ArrayHelper;
 use yii\httpclient\Client as HttpClient;
-use yii\httpclient\Client;
+
 
 /**
  * Class BaseClient a base class that implements the [[GatewayInterface]].
@@ -60,6 +61,14 @@ abstract class BaseGateway extends Component implements GatewayInterface
      * @var array|BaseClient[]
      */
     private $_clients = [];
+
+    /**
+     * @inheritdoc
+     */
+    public function getVersion(): string
+    {
+        return '1.0';
+    }
 
     /**
      * @inheritdoc
@@ -182,7 +191,7 @@ abstract class BaseGateway extends Component implements GatewayInterface
     /**
      * @inheritdoc
      * @return ResponseData|DataInterface
-     * @throws InvalidConfigException|InvalidArgumentException
+     * @throws InvalidConfigException|InvalidArgumentException|\ReflectionException
      */
     public function request($command, array $data, $clientId = null): DataInterface
     {
@@ -205,12 +214,33 @@ abstract class BaseGateway extends Component implements GatewayInterface
             $responseData = Yii::createObject($this->responseDataConfig, [$command, $data, $client]);
             $event->responseData = $responseData;
             $this->afterRequest($event);
-            Yii::debug(__CLASS__ . " requested sent with command: `$command`");
+            Yii::debug(__CLASS__ . " requested sent with command: `$command` - version: " . $this->getVersion());
 
             return $responseData;
         } else {
             throw new InvalidArgumentException("Unknown request command `$command`");
         }
+    }
+
+    /**
+     * This method automatically detect request commands supported via constants name prefix with `RC_`.
+     * `RC` meaning Request Command.
+     *
+     * @return array An array constants value have name prefix with `RC_`
+     * @throws \ReflectionException
+     */
+    public function requestCommands(): array
+    {
+        $reflection = new ReflectionClass($this);
+
+        $commands = [];
+        foreach ($reflection->getConstants() as $name => $value) {
+            if (strpos($name, 'RC_') === 0) {
+                $commands[] = $value;
+            }
+        }
+
+        return $commands;
     }
 
     /**

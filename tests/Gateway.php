@@ -23,37 +23,34 @@ use vxm\gatewayclients\BaseGateway;
 class Gateway extends BaseGateway
 {
 
+    const RC_CHARGE = 'charge';
+
+    const RC_REFUND = 'refund';
+
     public $responseDataConfig = ['class' => ResponseData::class];
 
     public $requestDataConfig = ['class' => RequestData::class];
 
     public $clientConfig = ['class' => Client::class];
 
-
-    public function getVersion(): string
-    {
-        return '1.0';
-    }
-
     public function getBaseUrl(): string
     {
         return 'http://test.app';
-    }
-
-    public function requestCommands(): array
-    {
-        return ['charge', 'refund'];
     }
 
     protected function requestInternal(\vxm\gatewayclients\RequestData $requestData, HttpClient $httpClient): array
     {
         $requestData->get();
 
-        if ($requestData->getCommand() === 'charge') {
-            return ['success' => true, 'command' => 'charge', 'user' => 'test01'];
-        } else {
-            return ['success' => false, 'command' => 'refund', 'user' => 'test02'];
+        if ($requestData->getCommand() === self::RC_CHARGE) {
+            $data = ['success' => true];
+        } else{
+            $data = ['success' => false];
         }
+
+        $data['command'] = $requestData->getCommand();
+
+        return $data;
     }
 
 }

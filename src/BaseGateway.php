@@ -223,6 +223,14 @@ abstract class BaseGateway extends Component implements GatewayInterface
     }
 
     /**
+     * An array store all request commands supported in gateway [[request()]].
+     *
+     * @see requestCommands
+     * @var array
+     */
+    private $_requestCommands;
+
+    /**
      * This method automatically detect request commands supported via constants name prefix with `RC_`.
      * `RC` meaning Request Command.
      *
@@ -231,16 +239,20 @@ abstract class BaseGateway extends Component implements GatewayInterface
      */
     public function requestCommands(): array
     {
-        $reflection = new ReflectionClass($this);
+        if ($this->_requestCommands === null) {
+            $reflection = new ReflectionClass($this);
 
-        $commands = [];
-        foreach ($reflection->getConstants() as $name => $value) {
-            if (strpos($name, 'RC_') === 0) {
-                $commands[] = $value;
+            $commands = [];
+            foreach ($reflection->getConstants() as $name => $value) {
+                if (strpos($name, 'RC_') === 0) {
+                    $commands[] = $value;
+                }
             }
-        }
 
-        return $commands;
+            return $this->_requestCommands = $commands;
+        } else {
+            return $this->_requestCommands;
+        }
     }
 
     /**

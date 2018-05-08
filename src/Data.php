@@ -14,7 +14,8 @@ use yii\base\InvalidConfigException;
 /**
  * Data is the base class that implements the DataInterface provide data for send or get from gateway server api.
  *
- * @property BaseClient $client
+ * @property BaseClient $client The client of data.
+ * @property string $command The command of data useful when detect attributes and scenario.
  *
  * @author Vuong Minh <vuongxuongminh@gmail.com>
  * @since 1.0
@@ -35,7 +36,7 @@ class Data extends DynamicModel implements DataInterface
         $this->_command = $command;
         $this->_client = $client;
 
-        $this->setScenario($command);
+        $this->setScenario($this->getCommand());
         $this->ensureAttributes($attributes);
 
         parent::__construct($attributes, $config);
@@ -46,7 +47,7 @@ class Data extends DynamicModel implements DataInterface
      */
     public function scenarios()
     {
-        return array_merge([$this->getScenario() => []], parent::scenarios());
+        return array_merge([$this->getCommand() => []], parent::scenarios());
     }
 
     /**

@@ -12,8 +12,9 @@ This Yii2 extension is an abstraction layer provide the skeleton for build  an a
 
 ## Requirements
 
-* PHP 7.1
-* Yii 2.0.13
+* PHP >= 7.1
+* Yii >= 2.0.13
+* Yii2 Http Client: >= 2.0.0
 * OpenSSL, cURL extensions
 
 

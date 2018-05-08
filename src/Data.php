@@ -8,7 +8,6 @@
 namespace vxm\gatewayclients;
 
 use yii\base\DynamicModel;
-use yii\base\NotSupportedException;
 use yii\base\InvalidConfigException;
 
 /**
@@ -90,7 +89,7 @@ class Data extends DynamicModel implements DataInterface
 
     /**
      * @inheritdoc
-     * @throws InvalidConfigException|NotSupportedException
+     * @throws InvalidConfigException
      */
     public function get(bool $validate = true): array
     {

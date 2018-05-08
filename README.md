@@ -10,6 +10,13 @@
 
 This Yii2 extension is an abstraction layer provide the skeleton for build  an api client (1-n).
 
+## Requirements
+
+* PHP 7.1
+* Yii 2.0.13
+* OpenSSL, cURL extensions
+
+
 ## Installation
 
 The preferred way to install this yii2-extension is through [composer](http://getcomposer.org/download/).

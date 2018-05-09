@@ -10,7 +10,7 @@ namespace vxm\gatewayclients;
 
 use Yii;
 
-use yii\base\BaseObject;
+use yii\base\Component;
 use yii\base\InvalidArgumentException;
 
 /**
@@ -19,7 +19,7 @@ use yii\base\InvalidArgumentException;
  * @author Vuong Minh <vuongxuongminh@gmail.com>
  * @since 1.0
  */
-class GatewayCollection extends BaseObject
+class GatewayCollection extends Component
 {
 
     /**

@@ -118,6 +118,21 @@ class GatewayCollection extends Component
     }
 
     /**
+     * Magic getter method provide access gateway by unknown property name.
+     *
+     * @inheritdoc
+     * @throws \yii\base\InvalidConfigException|\yii\base\UnknownPropertyException
+     */
+    public function __get($name)
+    {
+        if ($this->hasGateway($name)) {
+            return $this->getGateway($name);
+        } else {
+            parent::__get($name);
+        }
+    }
+
+    /**
      * This method is an alias of [[vxm\gatewayclients\GatewayInterface::request()]].
      *
      * @param int|string $command The command of request
@@ -131,5 +146,6 @@ class GatewayCollection extends Component
     {
         return $this->getGateway($gatewayId)->request($command, $data, $clientId);
     }
+
 
 }

@@ -48,6 +48,17 @@ class GatewayCollectionTest extends TestCase
         $this->assertInstanceOf(Gateway::class, $this->_collection->getGateway($gateway));
     }
 
+    /**
+     * @dataProvider gatewayProvider
+     * @param string $gateway
+     * @param $config
+     */
+    public function testGetGatewayByUnknownProperty(string $gateway, $config)
+    {
+        $this->_collection->setGateway($gateway, $config);
+        $this->assertInstanceOf(Gateway::class, $this->_collection->$gateway);
+    }
+
     public function gatewayProvider()
     {
         return [

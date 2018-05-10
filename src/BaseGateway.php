@@ -266,7 +266,7 @@ abstract class BaseGateway extends Component implements GatewayInterface
      * {
      *     // ...custom code here...
      *
-     *     parent::beforeSave($event);
+     *     parent::beforeRequest($event);
      * }
      * ```
      *

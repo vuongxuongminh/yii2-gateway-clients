@@ -220,11 +220,11 @@ abstract class BaseGateway extends Component implements GatewayInterface
      * When overriding this method, make sure you call the parent implementation like the following:
      *
      * ```php
-     * public function beforeRequest($insert)
+     * public function beforeRequest(RequestEvent $event)
      * {
      *     // ...custom code here...
      *
-     *     parent::beforeSave($insert);
+     *     parent::beforeSave($event);
      * }
      * ```
      *
@@ -287,8 +287,16 @@ abstract class BaseGateway extends Component implements GatewayInterface
     /**
      * This method is called at the end of requesting data to gateway server api.
      * The default implementation will trigger an [[EVENT_AFTER_REQUEST]] event.
-     * When overriding this method, make sure you call the parent implementation at the end so that
-     * the event is triggered.
+     * When overriding this method, make sure you call the parent implementation at the end like the following:
+     *
+     * ```php
+     * public function afterRequest(RequestEvent $event)
+     * {
+     *     // ...custom code here...
+     *
+     *     parent::afterRequest($event);
+     * }
+     * ```
      *
      * @param RequestEvent $event an event will be trigger in this method.
      */

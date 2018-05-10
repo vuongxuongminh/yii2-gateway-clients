@@ -10,18 +10,25 @@
 
 This Yii2 extension is an abstraction layer provide the skeleton for build  an api client (1-n).
 
+## Requirements
+
+* PHP >= 7.1
+* Yii >= 2.0.13
+* Yii2 Http Client: >= 2.0.0
+
+
 ## Installation
 
 The preferred way to install this yii2-extension is through [composer](http://getcomposer.org/download/).
 
 ```sh
-composer require "vxm/yii2-gatewayclients"
+composer require "vxm/yii2-gateway-clients"
 ```
 
 or add
 
 ```json
-"vxm/yii2-gatewayclients": "*"
+"vxm/yii2-gateway-clients": "*"
 ```
 
 to the require section of your composer.json.

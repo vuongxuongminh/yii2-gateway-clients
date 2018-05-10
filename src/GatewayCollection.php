@@ -10,8 +10,9 @@ namespace vxm\gatewayclients;
 
 use Yii;
 
-use yii\base\BaseObject;
+use yii\base\Component;
 use yii\base\InvalidArgumentException;
+use yii\helpers\ArrayHelper;
 
 /**
  * Class GatewayCollection. This is the collection of [[\vxm\gatewayclients\GatewayInterface]], it may set to application components for easily control gateways.
@@ -19,8 +20,13 @@ use yii\base\InvalidArgumentException;
  * @author Vuong Minh <vuongxuongminh@gmail.com>
  * @since 1.0
  */
-class GatewayCollection extends BaseObject
+class GatewayCollection extends Component
 {
+
+    /**
+     * @var array Common config gateways when init it use to config gateway object.
+     */
+    public $gatewayConfig = [];
 
     /**
      * @var array|GatewayInterface[] the gateways list.
@@ -71,6 +77,15 @@ class GatewayCollection extends BaseObject
         if ($gateway === null) {
             throw new InvalidArgumentException("Gateway: `$id` not exist!");
         } elseif (!$gateway instanceof GatewayInterface) {
+
+            if (is_string($gateway)) {
+                $gateway = ['class' => $gateway];
+            }
+
+            if (is_array($gateway)) {
+                $gateway = ArrayHelper::merge($this->gatewayConfig, $gateway);
+            }
+
             $gateway = $this->_gateways[$id] = Yii::createObject($gateway);
         }
 
@@ -103,6 +118,21 @@ class GatewayCollection extends BaseObject
     }
 
     /**
+     * Magic getter method provide access gateway by unknown property name.
+     *
+     * @inheritdoc
+     * @throws \yii\base\InvalidConfigException|\yii\base\UnknownPropertyException
+     */
+    public function __get($name)
+    {
+        if ($this->hasGateway($name)) {
+            return $this->getGateway($name);
+        } else {
+            parent::__get($name);
+        }
+    }
+
+    /**
      * This method is an alias of [[vxm\gatewayclients\GatewayInterface::request()]].
      *
      * @param int|string $command The command of request
@@ -116,5 +146,6 @@ class GatewayCollection extends BaseObject
     {
         return $this->getGateway($gatewayId)->request($command, $data, $clientId);
     }
+
 
 }

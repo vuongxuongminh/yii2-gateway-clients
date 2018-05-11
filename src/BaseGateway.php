@@ -42,13 +42,15 @@ abstract class BaseGateway extends Component implements GatewayInterface
 
     /**
      * @var array config use for setup properties of all request data to send to gateway server api. It called by [[request()]].
+     * An extend class must be override it for config default request data class.
      */
-    public $requestDataConfig;
+    public $requestDataConfig = [];
 
     /**
      * @var array config use for setup properties of all response data get from gateway server api. It called by [[request()]].
+     * An extend class must be override it for config default response data class.
      */
-    public $responseDataConfig;
+    public $responseDataConfig = [];
 
     /**
      * @var array config of client use for setup properties of the clients list.

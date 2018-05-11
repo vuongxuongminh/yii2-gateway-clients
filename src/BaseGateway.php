@@ -54,6 +54,7 @@ abstract class BaseGateway extends Component implements GatewayInterface
 
     /**
      * @var array config of client use for setup properties of the clients list.
+     * An extend class must be override it for config default client class.
      */
     public $clientConfig = [];
 

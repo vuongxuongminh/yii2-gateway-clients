@@ -53,4 +53,13 @@ class Gateway extends BaseGateway
         return $data;
     }
 
+    public function getSupportedVersions(): array
+    {
+        return ['1.0', '1.0.1', '2.0', '3.0'];
+    }
+
+    protected function defaultVersion(): string
+    {
+        return '3.0';
+    }
 }

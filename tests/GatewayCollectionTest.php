@@ -35,9 +35,6 @@ class GatewayCollectionTest extends TestCase
 
     /**
      * @dataProvider gatewayProvider
-     * @param $gateway
-     * @param array|string $config
-     * @throws \yii\base\InvalidConfigException
      */
     public function testSetGetGateway(string $gateway, $config)
     {
@@ -50,8 +47,6 @@ class GatewayCollectionTest extends TestCase
 
     /**
      * @dataProvider gatewayProvider
-     * @param string $gateway
-     * @param $config
      */
     public function testGetGatewayByUnknownProperty(string $gateway, $config)
     {
@@ -73,9 +68,6 @@ class GatewayCollectionTest extends TestCase
     /**
      * @depends      testSetGetGateway
      * @dataProvider gatewayProvider
-     * @param string $gateway
-     * @param $config
-     * @throws \yii\base\InvalidConfigException
      */
     public function testValidRequest(string $gateway, $config)
     {
@@ -92,9 +84,6 @@ class GatewayCollectionTest extends TestCase
      * @expectedException \yii\base\InvalidArgumentException
      * @depends      testValidRequest
      * @dataProvider gatewayProvider
-     * @param string $gateway
-     * @param $config
-     * @throws \yii\base\InvalidConfigException
      */
     public function testUnknownRequestCommand(string $gateway, $config)
     {
@@ -106,9 +95,6 @@ class GatewayCollectionTest extends TestCase
      * @expectedException \yii\base\InvalidConfigException
      * @depends      testValidRequest
      * @dataProvider gatewayProvider
-     * @param string $gateway
-     * @param $config
-     * @throws \yii\base\InvalidConfigException
      */
     public function testUnValidRequestData(string $gateway, $config)
     {
@@ -118,8 +104,6 @@ class GatewayCollectionTest extends TestCase
 
     /**
      * @dataProvider gatewaysProvider
-     * @param $config
-     * @throws \yii\base\InvalidConfigException
      */
     public function testSetGetGateways(array $config)
     {

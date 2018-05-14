@@ -13,6 +13,7 @@ use ReflectionClass;
 use yii\base\Component;
 use yii\base\InvalidArgumentException;
 use yii\base\InvalidConfigException;
+use yii\base\NotSupportedException;
 use yii\helpers\ArrayHelper;
 use yii\httpclient\Client as HttpClient;
 
@@ -21,8 +22,9 @@ use yii\httpclient\Client as HttpClient;
  * Class BaseClient a base class that implements the [[GatewayInterface]].
  * It is an abstraction layer, implements classes will be add more properties to support create request to gateway server api.
  *
- * @property BaseClient $defaultClient
- * @property BaseClient $client
+ * @property BaseClient $defaultClient Default client of gateway.
+ * @property BaseClient $client Default client of gateway.
+ * @property array|string[] $supportedVersions The list supported versions of gateway.
  *
  * @author Vuong Minh <vuongxuongminh@gmail.com>
  * @since 1.0
@@ -66,9 +68,58 @@ abstract class BaseGateway extends Component implements GatewayInterface
     private $_clients = [];
 
     /**
+     * @var string A currently version of gateway
+     */
+    private $_version;
+
+    /**
      * @inheritdoc
      */
     public function getVersion(): string
+    {
+        if ($this->_version === null) {
+            return $this->_version = $this->defaultVersion();
+        } else {
+            return $this->_version;
+        }
+    }
+
+    /**
+     * This method return list supported versions of gateway.
+     *
+     * @return array|string[] List supported versions.
+     */
+    public function getSupportedVersions(): array
+    {
+        return [$this->getVersion()];
+    }
+
+    /**
+     * This method support set version of gateway.
+     *
+     * @param string $version of gateway
+     * @return bool Return TRUE if version has been set.
+     * @throws NotSupportedException
+     */
+    public function setVersion(string $version): bool
+    {
+        $supportedVersions = $this->getSupportedVersions();
+
+        if (in_array($version, $supportedVersions, true)) {
+            $this->_version = $version;
+
+            return true;
+        } else {
+            throw new NotSupportedException("Version `$version` is not supported in " . __CLASS__ . "! Supported versions: " . implode(' - ', $supportedVersions));
+        }
+    }
+
+    /**
+     * This method return default version of gateway if `version` is not set.
+     *
+     * @return string
+     */
+    protected function defaultVersion(): string
     {
         return '1.0';
     }
@@ -201,7 +252,11 @@ abstract class BaseGateway extends Component implements GatewayInterface
         if (in_array($command, $this->requestCommands(), true)) {
             $client = $this->getClient($clientId);
 
-            /** @var RequestData $requestData */
+            /**
+             * @var RequestData $requestData
+             * @var RequestEvent $event
+             * @var ResponseData $responseData
+             */
 
             $requestData = Yii::createObject($this->requestDataConfig, [$command, $data, $client]);
             $event = Yii::createObject([

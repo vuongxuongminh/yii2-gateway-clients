@@ -24,9 +24,7 @@ class GatewayTest extends TestCase
      */
     protected $_gateway;
 
-    /**
-     * @throws \yii\base\InvalidConfigException
-     */
+
     public function setUp()
     {
         $this->_gateway = Yii::createObject(Gateway::class);
@@ -39,8 +37,6 @@ class GatewayTest extends TestCase
 
     /**
      * @dataProvider clientsProvider
-     * @param array $config
-     * @throws \yii\base\InvalidConfigException
      */
     public function testSetGetClients(array $config)
     {
@@ -71,9 +67,6 @@ class GatewayTest extends TestCase
 
     /**
      * @dataProvider clientProvider
-     * @param string $clientId
-     * @param array $config
-     * @throws \yii\base\InvalidConfigException
      */
     public function testSetGetClient(string $clientId, array $config)
     {
@@ -97,9 +90,6 @@ class GatewayTest extends TestCase
     /**
      * @dataProvider clientProvider
      * @depends      testSetGetClient
-     * @param string $clientId
-     * @param array $config
-     * @throws \yii\base\InvalidConfigException
      */
     public function testValidRequest(string $clientId, array $config)
     {
@@ -120,7 +110,6 @@ class GatewayTest extends TestCase
     /**
      * @depends testValidRequest
      * @expectedException \yii\base\InvalidArgumentException
-     * @throws \yii\base\InvalidConfigException
      */
     public function testUnknownRequestCommand()
     {
@@ -130,14 +119,27 @@ class GatewayTest extends TestCase
     /**
      * @depends      testValidRequest
      * @expectedException \yii\base\InvalidConfigException
-     * @param string $clientId
-     * @param array $config
-     * @throws \yii\base\InvalidConfigException
      */
     public function testUnValidRequestData()
     {
         $this->_gateway->setClient(['username' => 'test01']);
         $this->_gateway->request('refund', []);
     }
+
+    /**
+     * @expectedException \yii\base\NotSupportedException
+     */
+    public function testVersion()
+    {
+        $this->assertArraySubset(['1.0', '1.0.1', '2.0', '3.0'], $this->_gateway->getSupportedVersions());
+
+        // Valid
+        $this->_gateway->setVersion('1.0.1');
+        $this->assertEquals('1.0.1', $this->_gateway->getVersion());
+
+        // Throws
+        $this->_gateway->setVersion('4.0');
+    }
+
 
 }

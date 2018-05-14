@@ -15,7 +15,7 @@ This Yii2 extension is an abstraction layer provide the skeleton for build  an a
 
 * [PHP >= 7.1](http://php.net)
 * [yiisoft/yii2 >= 2.0.13](https://github.com/yiisoft/yii2)
-* [yiisoft/yii2-httpclient >= 2.0.5](https://github.com/yiisoft/yii2-httpclient)
+* [yiisoft/yii2-httpclient >= 2.0.0](https://github.com/yiisoft/yii2-httpclient)
 
 
 ## Installation

@@ -139,7 +139,7 @@ class GatewayCollection extends Component
      * @param array $data An array data use to send to gateway server api.
      * @param int|string $gatewayId An id of gateway in the gateway lists.
      * @param null|int|string $clientId An id client of gateway in the client lists. If not set default client of gateway will be use to make request.
-     * @return DataInterface An object data get from gateway server api.
+     * @return ResponseData|DataInterface An object data get from gateway server api.
      * @throws \yii\base\InvalidConfigException
      */
     public function request($command, array $data, $gatewayId, $clientId = null): DataInterface

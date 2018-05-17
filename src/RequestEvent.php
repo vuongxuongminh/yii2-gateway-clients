@@ -1,6 +1,6 @@
 <?php
 /**
- * @link https://github.com/vuongxuongminh/yii2-gatewayclients
+ * @link https://github.com/vuongxuongminh/yii2-gateway-clients
  * @copyright Copyright (c) 2018 Vuong Xuong Minh
  * @license [New BSD License](http://www.opensource.org/licenses/bsd-license.php)
  */

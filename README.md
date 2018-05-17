@@ -38,7 +38,7 @@ to the require section of your composer.json.
 
 This is an abstraction layer, you MUST be create your own classes implements it. It designed for DRY principle when you need to build rest api client.
 
-#### Interfaces Introduce
+## Interfaces Introduce
 
 |Interface | Details| 
 |------|--------|
@@ -46,16 +46,21 @@ This is an abstraction layer, you MUST be create your own classes implements it.
 |[**ClientInterface**](src/ClientInterface.php)|It should be implemented by classes provide information for access to gateway server api via [**GatewayInterface**](src/GatewayInterface.php).
 |[**DataInterface**](src/DataInterface.php)|It should be implemented by classes provide data for support [**GatewayInterface**](src/GatewayInterface.php) make request or get response data from gateway server api.
 
-#### Abstract Classes Introduce
+## Abstract Classes Introduce
 
 An abstract classes have been designed for implemented an interfaces. You should extends it for easier implements interfaces on your own classes.
 
 |Abstract Class | Details| 
 |------|--------|
-|[**BaseGateway**](src/BaseGateway.php)|Implemented [**GatewayInterface**](src/GatewayInterface.php), abstract method your own class must create: `requestInternal`, `getVersion`, `getBaseUrl`.
+|[**BaseGateway**](src/BaseGateway.php)|Implemented [**GatewayInterface**](src/GatewayInterface.php), abstract method your own class must create: `requestInternal`, `getBaseUrl`.
 |[**BaseClient**](src/BaseClient.php)|Implemented [**ClientInterface**](src/ClientInterface.php), it not have an abstract method your own class should add properties an information for access gateway server api.
 |[**ResponseData**](src/ResponseData.php)|Abstract method your own class must create is `getIsOk` for end-user checking response data get from gateway server api is valid or not.
 
-#### Need an example? 
+## Need an example? 
 
 Click [**here**](examples/example.php) to read simple example.
+
+
+## Project using it
+
+* [yiiviet/yii2-payment](https://github.com/yiiviet/yii2-payment)

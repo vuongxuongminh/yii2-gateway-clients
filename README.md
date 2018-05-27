@@ -6,7 +6,6 @@
 [![Build Status](https://travis-ci.org/vuongxuongminh/yii2-gateway-clients.svg?branch=1.0.0)](https://travis-ci.org/vuongxuongminh/yii2-gateway-clients)
 [![Code Coverage](https://scrutinizer-ci.com/g/vuongxuongminh/yii2-gateway-clients/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/vuongxuongminh/yii2-gateway-clients/?branch=master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/vuongxuongminh/yii2-gateway-clients/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/vuongxuongminh/yii2-gateway-clients/?branch=master)
-[![Dependency Status](https://www.versioneye.com/user/projects/5af065d90fb24f546967018a/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/5af065d90fb24f546967018a)
 [![Yii2](https://img.shields.io/badge/Powered_by-Yii_Framework-green.svg?style=flat)](http://www.yiiframework.com/)
 
 This Yii2 extension is an abstraction layer provide the skeleton for build  an api client (1-n).
@@ -14,8 +13,8 @@ This Yii2 extension is an abstraction layer provide the skeleton for build  an a
 ## Requirements
 
 * [PHP >= 7.1](http://php.net)
-* [yiisoft/yii2 >= 2.0.13](https://github.com/yiisoft/yii2)
-* [yiisoft/yii2-httpclient >= 2.0.0](https://github.com/yiisoft/yii2-httpclient)
+* [yiisoft/yii2 ~ 2.0.13](https://github.com/yiisoft/yii2)
+* [yiisoft/yii2-httpclient ~ 2.0.0](https://github.com/yiisoft/yii2-httpclient)
 
 
 ## Installation

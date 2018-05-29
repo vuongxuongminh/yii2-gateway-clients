@@ -62,4 +62,5 @@ Click [**here**](examples/example.php) to read simple example.
 
 ## Project using it
 
+* [yiiviet/yii2-esms](https://github.com/yiiviet/yii2-esms)
 * [yiiviet/yii2-payment](https://github.com/yiiviet/yii2-payment)

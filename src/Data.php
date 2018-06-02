@@ -7,6 +7,8 @@
 
 namespace vxm\gatewayclients;
 
+use GatewayClients\DataInterface;
+
 use yii\base\DynamicModel;
 use yii\base\InvalidConfigException;
 

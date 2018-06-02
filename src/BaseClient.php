@@ -9,6 +9,9 @@ namespace vxm\gatewayclients;
 
 use yii\base\Component;
 
+use GatewayClients\ClientInterface;
+use GatewayClients\GatewayInterface;
+
 /**
  * Class BaseClient a base class that implements the [[ClientInterface]].
  * It is an abstraction layer, implements classes will be add more properties to support create request to gateway server api.

@@ -10,6 +10,9 @@ namespace vxm\gatewayclients;
 
 use Yii;
 
+use GatewayClients\DataInterface;
+use GatewayClients\GatewayInterface;
+
 use yii\base\Component;
 use yii\base\InvalidArgumentException;
 use yii\helpers\ArrayHelper;
@@ -133,7 +136,7 @@ class GatewayCollection extends Component
     }
 
     /**
-     * This method is an alias of [[vxm\gatewayclients\GatewayInterface::request()]].
+     * This method is an alias of [[GatewayInterface::request()]].
      *
      * @param int|string $command The command of request
      * @param array $data An array data use to send to gateway server api.

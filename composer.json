@@ -13,9 +13,10 @@
     "require": {
         "php": ">=7.1.0",
         "yiisoft/yii2": ">=2.0.13",
-        "yiisoft/yii2-httpclient": "~2.0.0"
+        "yiisoft/yii2-httpclient": "~2.0.0",
+        "vxm/gateway-clients": "~1.0.0"
     },
-	
+
     "autoload": {
         "psr-4": {
             "vxm\\gatewayclients\\": "src"

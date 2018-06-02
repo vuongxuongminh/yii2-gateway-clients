@@ -15,6 +15,7 @@ This Yii2 extension is an abstraction layer provide the skeleton for build  an a
 * [PHP >= 7.1](http://php.net)
 * [yiisoft/yii2 ~ 2.0.13](https://github.com/yiisoft/yii2)
 * [yiisoft/yii2-httpclient ~ 2.0.0](https://github.com/yiisoft/yii2-httpclient)
+* [vxm/gateway-clients ~ 1.0.0](https://github.com/vuongxuongminh/gateway-clients)
 
 
 ## Installation
@@ -36,14 +37,6 @@ to the require section of your composer.json.
 ## Usage
 
 This is an abstraction layer, you MUST be create your own classes implements it. It designed for DRY principle when you need to build rest api client.
-
-## Interfaces Introduce
-
-|Interface | Details| 
-|------|--------|
-|[**GatewayInterface**](src/GatewayInterface.php)|It should be implemented by classes provide gateway server api information.
-|[**ClientInterface**](src/ClientInterface.php)|It should be implemented by classes provide information for access to gateway server api via [**GatewayInterface**](src/GatewayInterface.php).
-|[**DataInterface**](src/DataInterface.php)|It should be implemented by classes provide data for support [**GatewayInterface**](src/GatewayInterface.php) make request or get response data from gateway server api.
 
 ## Abstract Classes Introduce
 

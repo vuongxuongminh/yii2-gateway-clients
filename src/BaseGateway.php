@@ -10,12 +10,17 @@ namespace vxm\gatewayclients;
 use Yii;
 use ReflectionClass;
 
+use GatewayClients\ClientInterface;
+use GatewayClients\DataInterface;
+use GatewayClients\GatewayInterface;
+
 use yii\base\Component;
 use yii\base\InvalidArgumentException;
 use yii\base\InvalidConfigException;
 use yii\base\NotSupportedException;
 use yii\helpers\ArrayHelper;
 use yii\httpclient\Client as HttpClient;
+
 
 
 /**

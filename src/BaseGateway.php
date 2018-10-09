@@ -22,7 +22,6 @@ use yii\helpers\ArrayHelper;
 use yii\httpclient\Client as HttpClient;
 
 
-
 /**
  * Class BaseClient a base class that implements the [[GatewayInterface]].
  * It is an abstraction layer, implements classes will be add more properties to support create request to gateway server api.
@@ -64,6 +63,12 @@ abstract class BaseGateway extends Component implements GatewayInterface
      * An extend class must be override it for config default client class.
      */
     public $clientConfig = [];
+
+    /**
+     * @var array config of `yii\httpclient\Client` use for send request to api server.
+     * @since 2.0.1
+     */
+    public $httpClientConfig = [];
 
     /**
      * The clients list.
@@ -348,21 +353,18 @@ abstract class BaseGateway extends Component implements GatewayInterface
     /**
      * This method is called in [[request()]] invoke client and use it make request send to gateway server api.
      *
-     * @param bool $force
-     * @return object|HttpClient
+     * @param bool $force whether to force new instance
+     * @return object|HttpClient instance use to send request
      * @throws InvalidConfigException
      */
     protected function getHttpClient(bool $force = false): HttpClient
     {
         if ($this->_httpClient === null || $force) {
             /** @var HttpClient $client */
+            $config = ArrayHelper::merge(['class' => HttpClient::class], $this->httpClientConfig);
+            $config['baseUrl'] = $this->getBaseUrl();
 
-            $client = $this->_httpClient = Yii::createObject(ArrayHelper::merge([
-                'class' => HttpClient::class,
-                'baseUrl' => $this->getBaseUrl()
-            ], $this->getHttpClientConfig()));
-
-            return $client;
+            return $this->_httpClient = Yii::createObject($config);
         } else {
             return $this->_httpClient;
         }
@@ -373,6 +375,7 @@ abstract class BaseGateway extends Component implements GatewayInterface
      * An implement class may override this method for add default headers, transport, options...
      *
      * @return array
+     * @deprecated since 2.0.1 move config to public property `httpClientConfig`
      */
     protected function getHttpClientConfig(): array
     {

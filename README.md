@@ -44,8 +44,8 @@ An abstract classes have been designed for implemented an interfaces. You should
 
 |Abstract Class | Details| 
 |------|--------|
-|[**BaseGateway**](src/BaseGateway.php)|Implemented [**GatewayInterface**](src/GatewayInterface.php), abstract method your own class must create: `requestInternal`, `getBaseUrl`.
-|[**BaseClient**](src/BaseClient.php)|Implemented [**ClientInterface**](src/ClientInterface.php), it not have an abstract method your own class should add properties an information for access gateway server api.
+|[**BaseGateway**](src/BaseGateway.php)|Implemented [**GatewayInterface**](https://github.com/vuongxuongminh/gateway-clients/blob/master/src/GatewayInterface.php), abstract method your own class must create: `requestInternal`, `getBaseUrl`.
+|[**BaseClient**](src/BaseClient.php)|Implemented [**ClientInterface**](https://github.com/vuongxuongminh/gateway-clients/blob/master/src/ClientInterface.php), it not have an abstract method your own class should add properties an information for access gateway server api.
 |[**ResponseData**](src/ResponseData.php)|Abstract method your own class must create is `getIsOk` for end-user checking response data get from gateway server api is valid or not.
 
 ## Need an example? 

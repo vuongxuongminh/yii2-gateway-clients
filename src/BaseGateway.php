@@ -360,7 +360,6 @@ abstract class BaseGateway extends Component implements GatewayInterface
     protected function getHttpClient(bool $force = false): HttpClient
     {
         if ($this->_httpClient === null || $force) {
-            /** @var HttpClient $client */
             $config = ArrayHelper::merge(['class' => HttpClient::class], $this->httpClientConfig);
             $config['baseUrl'] = $this->getBaseUrl();
 

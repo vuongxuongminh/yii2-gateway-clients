@@ -286,7 +286,7 @@ abstract class BaseGateway extends Component implements GatewayInterface
 
             return $responseData;
         } else {
-            throw new InvalidArgumentException("Unknown request command `$command`");
+            throw new InvalidArgumentException("Request command `$command` invalid in " . __CLASS__);
         }
     }
 

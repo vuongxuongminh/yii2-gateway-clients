@@ -95,15 +95,15 @@ class GatewayTest extends TestCase
     {
         $this->_gateway->setClient($clientId, $config);
 
-        $response = $this->_gateway->request('charge', ['amount' => 5], $clientId);
+        $response = $this->_gateway->charge(['amount' => 5], $clientId);
         $this->assertTrue($response->getIsOk());
-        $response = $this->_gateway->request('refund', ['amount' => 5], $clientId);
+        $response = $this->_gateway->refund(['amount' => 5], $clientId);
         $this->assertFalse($response->getIsOk());
         $this->assertTrue(!empty($response->get()));
 
         $this->_gateway->setClient($config);
 
-        $response = $this->_gateway->request('charge', ['amount' => 5]);
+        $response = $this->_gateway->charge(['amount' => 5]);
         $this->assertEquals($this->_gateway->getClient(), $response->getClient());
     }
 
@@ -123,7 +123,7 @@ class GatewayTest extends TestCase
     public function testUnValidRequestData()
     {
         $this->_gateway->setClient(['username' => 'test01']);
-        $this->_gateway->request('refund', []);
+        $this->_gateway->refund([]);
     }
 
     /**

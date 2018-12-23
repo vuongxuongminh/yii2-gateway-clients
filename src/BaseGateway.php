@@ -16,7 +16,6 @@ use GatewayClients\GatewayInterface;
 
 use yii\base\Component;
 use yii\base\InvalidArgumentException;
-use yii\base\InvalidCallException;
 use yii\base\InvalidConfigException;
 use yii\base\NotSupportedException;
 use yii\helpers\ArrayHelper;
@@ -411,26 +410,6 @@ abstract class BaseGateway extends Component implements GatewayInterface
     public function afterRequest(RequestEvent $event)
     {
         $this->trigger(self::EVENT_AFTER_REQUEST, $event);
-    }
-
-    /**
-     * This magic method is a shorthand of [[request()]] use request command for method name.
-     *
-     * @param string $name command exist in [[requestCommands()]]
-     * @param array $params use for [[request()]]
-     * @return ResponseData|DataInterface
-     * @throws \ReflectionException
-     * @see http://php.net/manual/en/language.oop5.overloading.php#object.call
-     */
-    public function __call($name, $params)
-    {
-        if (in_array($name, $this->requestCommands(), true)) {
-            array_unshift($params, $name);
-
-            return call_user_func_array([$this, 'request'], $params);
-        } else {
-            throw new InvalidCallException("Method `$name` does not exist in " . __CLASS__);
-        }
     }
 
 }
